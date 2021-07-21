@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <img src="#" />
+  <button onClick='newImg()'>New Cat</button>
+  <script>
+    const giphyApiKey = 'xxxxxxx'
+
+    const img = document.querySelector('img');
+    
+    newImg();
+
+    function newImg() {
+      fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${giphyApiKey}&s=cats`, {mode: 'cors'})
+      .then(function(response) {
+        return response.json();
+      }).then(function(response){
+        img.src = response.data.images.original.url;
+      });
+    }
+
+
+
+  </script>
+</body>
+</html>
