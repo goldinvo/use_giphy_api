@@ -8,19 +8,23 @@
   <img src="#" />
   <button onClick='newImg()'>New Cat</button>
   <script>
-    const giphyApiKey = 'xxxxxxx'
+    const giphyApiKey = 'xxxxxxxxx'
 
     const img = document.querySelector('img');
     
     newImg();
 
-    function newImg() {
-      fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${giphyApiKey}&s=cats`, {mode: 'cors'})
-      .then(function(response) {
-        return response.json();
-      }).then(function(response){
-        img.src = response.data.images.original.url;
-      });
+    async function newImg() {
+      try {
+        const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${giphyApiKey}&s=cats`, {mode: 'cors'});
+        const json = await response.json();
+
+        img.src = json.data.images.original.url;
+      } catch (err) {
+        alert(err);
+      }
+
+
     }
 
 
